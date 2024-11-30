@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="saludo">Prueba de "Es - Land"</string>
+    <color name="texto_color">#9D978F</color>
+    <color name="fondo_color">#0211EB</color>
+</resources>

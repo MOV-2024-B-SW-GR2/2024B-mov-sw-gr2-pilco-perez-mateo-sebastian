@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="saludo">Prueba de "Es - Port"</string>
+    <color name="texto_color">#9D947E</color>
+    <color name="fondo_color">#F407F0</color>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="saludo">Test of "En - Land"</string>
+    <color name="texto_color">#FFFF</color>
+    <color name="fondo_color">#DC0D0D</color>
+</resources>
