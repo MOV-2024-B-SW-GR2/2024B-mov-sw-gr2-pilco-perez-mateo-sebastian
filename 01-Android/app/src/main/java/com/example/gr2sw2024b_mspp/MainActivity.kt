@@ -23,6 +23,11 @@ class MainActivity : AppCompatActivity() {
             .setOnClickListener {
                 irActividad(ACicloVida::class.java) // los :: son sintáxis de java
             }
+        val btnListView = findViewById<Button>(R.id.btn_ir_list_view)
+        btnListView
+            .setOnClickListener{
+                irActividad(BListView::class.java)
+            }
     }
 
     fun irActividad(clase: Class<*>) {
