@@ -2,116 +2,108 @@ package org.example
 
 import org.example.controller.controlador
 import org.example.entities.Curso
+import javax.swing.JOptionPane
 
 fun main() {
     val controlador = controlador()
 
     while (true) {
-        println("\n---- Menú ----")
-        println("1. Listar Cursos")
-        println("2. Agregar Curso")
-        println("3. Eliminar Curso")
-        println("4. Agregar Estudiante a Curso")
-        println("5. Listar Estudiantes de Curso")
-        println("6. Eliminar Estudiante de Curso")
-        println("7. Actualizar Estudiante")
-        println("8. Salir")
-        print("Seleccione una opción: ")
-        when(readLine()?.toIntOrNull()) {
+        val menu = """
+            ---- Menú ----
+            1. Listar Cursos
+            2. Agregar Curso
+            3. Eliminar Curso
+            4. Agregar Estudiante a Curso
+            5. Listar Estudiantes de Curso
+            6. Eliminar Estudiante de Curso
+            7. Actualizar Estudiante
+            8. Salir
+        """.trimIndent()
+
+        val opcion = JOptionPane.showInputDialog(menu)?.toIntOrNull()
+        when (opcion) {
             1 -> {
                 val cursos = controlador.listarCurso()
-                if(cursos.isEmpty()) {
-                    println("No hay cursos disponibles")
+                val mensaje = if (cursos.isEmpty()) {
+                    "No hay cursos disponibles"
                 } else {
-                    cursos.forEach { curso ->
-                        println("ID: ${curso.id}, Nombre: ${curso.nombre}, Descripción: ${curso.descripcion}")
+                    cursos.joinToString("\n") { curso ->
+                        "ID: ${curso.id}, Nombre: ${curso.nombre}, Descripción: ${curso.descripcion}"
                     }
                 }
+                JOptionPane.showMessageDialog(null, mensaje)
             }
             2 -> {
-                println("Ingrese el ID del curso: ")
-                val id = readLine()?.toIntOrNull()?: return
-                println("Ingrese el nombre del curso: ")
-                val nombre = readLine()?.toString() ?: ""
-                println("Ingrese la descripción del curso: ")
-                val descripcion = readLine()?.toString() ?: ""
-                println("Ingrese la duración del curso (en meses): ")
-                val duracion = readLine()?.toIntOrNull()?:return
+                val id = JOptionPane.showInputDialog("Ingrese el ID del curso:")?.toIntOrNull() ?: return
+                val nombre = JOptionPane.showInputDialog("Ingrese el nombre del curso:") ?: ""
+                val descripcion = JOptionPane.showInputDialog("Ingrese la descripción del curso:") ?: ""
+                val duracion = JOptionPane.showInputDialog("Ingrese la duración del curso (en meses):")?.toIntOrNull() ?: return
+
                 controlador.agregarCurso(id, nombre, descripcion, duracion)
-                println("CURSO $nombre agregado con exito!")
+                JOptionPane.showMessageDialog(null, "Curso '$nombre' agregado con éxito!")
             }
             3 -> {
-                println("Ingrese el ID del curso a eliminar: ")
-                val idCurso = readLine()?.toIntOrNull()?: return
+                val idCurso = JOptionPane.showInputDialog("Ingrese el ID del curso a eliminar:")?.toIntOrNull() ?: return
                 val eliminado = controlador.eliminarCurso(idCurso)
-                if(eliminado) {
-                    println("CURSO con id= $idCurso eliminado con EXITO!")
+                val mensaje = if (eliminado) {
+                    "Curso con ID $idCurso eliminado con éxito!"
                 } else {
-                    println("CURSO no encontrado")
+                    "Curso no encontrado"
                 }
+                JOptionPane.showMessageDialog(null, mensaje)
             }
             4 -> {
-                println("Seleccione el ID del curso para agregar un estudiante: ")
-                val idCurso = readLine()?.toIntOrNull()?: return
-                println("Ingrese el ID del estudiante: ")
-                val idEstudiante = readLine()?.toIntOrNull()?: return
-                println("Ingrese el nombre del estudiante: ")
-                val nombre = readLine()?.toString() ?: ""
-                println("Ingrese la edad del estudiante: ")
-                val edad = readLine()?.toIntOrNull()?: return
-                println("Ingrese el email del estudiante: ")
-                val email = readLine()?.toString() ?: ""
-                println("Ingrese el teléfono del estudiante: ")
-                val telefono = readLine()?.toIntOrNull()?:return
+                val idCurso = JOptionPane.showInputDialog("Seleccione el ID del curso para agregar un estudiante:")?.toIntOrNull() ?: return
+                val idEstudiante = JOptionPane.showInputDialog("Ingrese el ID del estudiante:")?.toIntOrNull() ?: return
+                val nombre = JOptionPane.showInputDialog("Ingrese el nombre del estudiante:") ?: ""
+                val edad = JOptionPane.showInputDialog("Ingrese la edad del estudiante:")?.toIntOrNull() ?: return
+                val email = JOptionPane.showInputDialog("Ingrese el email del estudiante:") ?: ""
+                val telefono = JOptionPane.showInputDialog("Ingrese el teléfono del estudiante:")?.toIntOrNull() ?: return
+
                 controlador.agregarEstudianteACurso(idCurso, idEstudiante, nombre, edad, email, telefono)
-                println("Estudiante: $nombre agregado con exito!")
+                JOptionPane.showMessageDialog(null, "Estudiante '$nombre' agregado con éxito!")
             }
             5 -> {
-                println("Seleccione el ID del curso para listar a los estudiantes: ")
-                val idCurso = readLine()?.toIntOrNull()?: return
+                val idCurso = JOptionPane.showInputDialog("Seleccione el ID del curso para listar a los estudiantes:")?.toIntOrNull() ?: return
                 val estudiantes = controlador.listarEstudiantesCurso(idCurso)
-                if(estudiantes.isEmpty()) {
-                    println("NO hay estudiantes en este curso")
+                val mensaje = if (estudiantes.isEmpty()) {
+                    "No hay estudiantes en este curso"
                 } else {
-                    estudiantes.forEach { estudiante ->
-                        println("ID: ${estudiante.id}, Nombre: ${estudiante.nombre}, Edad: ${estudiante.edad}, Email: ${estudiante.email}")
+                    estudiantes.joinToString("\n") { estudiante ->
+                        "ID: ${estudiante.id}, Nombre: ${estudiante.nombre}, Edad: ${estudiante.edad}, Email: ${estudiante.email}"
                     }
                 }
+                JOptionPane.showMessageDialog(null, mensaje)
             }
             6 -> {
-                println("Seleccione el ID del curso para eliminar un estudiante: ")
-                val idCurso = readLine()?.toIntOrNull()?: return
-                println("Ingrese el ID del estudiante a eliminar:")
-                val idEstudiante = readLine()?.toIntOrNull() ?: return
+                val idCurso = JOptionPane.showInputDialog("Seleccione el ID del curso para eliminar un estudiante:")?.toIntOrNull() ?: return
+                val idEstudiante = JOptionPane.showInputDialog("Ingrese el ID del estudiante a eliminar:")?.toIntOrNull() ?: return
                 val eliminado = controlador.eliminarEstudianteDeCurso(idEstudiante, idCurso)
-                if(eliminado) {
-                    println("Estudiante con el Id: $idEstudiante eliminado con EXITO!")
+                val mensaje = if (eliminado) {
+                    "Estudiante con ID $idEstudiante eliminado con éxito!"
                 } else {
-                    println("Estudiante no encontrado!")
+                    "Estudiante no encontrado!"
                 }
+                JOptionPane.showMessageDialog(null, mensaje)
             }
             7 -> {
-                println("Seleccione el ID del curso para actualizar un estudiante:")
-                val idCurso = readLine()?.toIntOrNull() ?: return
-                println("Ingrese el ID del estudiante a actualizar:")
-                val idEstudiante = readLine()?.toIntOrNull() ?: return
-                println("Ingrese el nuevo nombre del estudiante:")
-                val nombre = readLine()?.toString() ?: ""
-                println("Ingrese la nueva edad del estudiante:")
-                val edad = readLine()?.toIntOrNull() ?: return
-                println("Ingrese el nuevo email del estudiante:")
-                val email = readLine()?.toString() ?: ""
-                println("Ingrese el nuevo teléfono del estudiante: ")
-                val telefono = readLine()?.toIntOrNull()?:return
-                val actualizado = controlador.actualizarEstudiante(idCurso,idEstudiante, nombre, edad, email, telefono)
-                if(actualizado) {
-                    println("Estudiante $nombre actualizado con EXITO!")
+                val idCurso = JOptionPane.showInputDialog("Seleccione el ID del curso para actualizar un estudiante:")?.toIntOrNull() ?: return
+                val idEstudiante = JOptionPane.showInputDialog("Ingrese el ID del estudiante a actualizar:")?.toIntOrNull() ?: return
+                val nombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre del estudiante:") ?: ""
+                val edad = JOptionPane.showInputDialog("Ingrese la nueva edad del estudiante:")?.toIntOrNull() ?: return
+                val email = JOptionPane.showInputDialog("Ingrese el nuevo email del estudiante:") ?: ""
+                val telefono = JOptionPane.showInputDialog("Ingrese el nuevo teléfono del estudiante:")?.toIntOrNull() ?: return
+
+                val actualizado = controlador.actualizarEstudiante(idCurso, idEstudiante, nombre, edad, email, telefono)
+                val mensaje = if (actualizado) {
+                    "Estudiante '$nombre' actualizado con éxito!"
                 } else {
-                    println("Estudiante no encontrado!")
+                    "Estudiante no encontrado!"
                 }
+                JOptionPane.showMessageDialog(null, mensaje)
             }
             8 -> break
-            else -> println("OPCION inválida. Intente de nuevo!")
+            else -> JOptionPane.showMessageDialog(null, "Opción inválida. Intente de nuevo!")
         }
     }
 }
