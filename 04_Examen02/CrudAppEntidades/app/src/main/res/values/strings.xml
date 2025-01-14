@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CrudApp</string>
+    <string name="prompt_selecciona_curso">Selecciona un curso</string>
+</resources>

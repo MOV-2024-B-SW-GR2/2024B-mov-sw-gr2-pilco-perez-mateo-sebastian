@@ -1,0 +1,12 @@
+<!-- Archivo: res/values/themes.xml -->
+<resources>
+    <style name="Theme.CrudApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Colores principales -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorSecondary">@color/teal_200</item>
+
+        <!-- Fondo de ventana -->
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+</resources>
