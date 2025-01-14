@@ -13,6 +13,29 @@ export const getEstudiantes = (req, res) => {
     });
 };
 
+// Obtener estudiantes por curso ID
+export const getEstudiantesByCursoId = (req, res) => {
+    const { cursoId } = req.params;
+    const db = getConnection();
+    db.query(
+        "SELECT * FROM Estudiantes WHERE curso_id = ?",
+        [cursoId],
+        (err, results) => {
+            if (err) {
+                console.error(
+                    `Error al obtener los estudiantes del curso ${cursoId}:`,
+                    err
+                );
+                res.status(500).json({
+                    error: `Error al obtener los estudiantes del curso ${cursoId}`,
+                });
+                return;
+            }
+            res.json(results);
+        }
+    );
+};
+
 // Crear un nuevo estudiante
 export const createEstudiante = (req, res) => {
     const { nombre, edad, email, telefono, curso_id } = req.body;
