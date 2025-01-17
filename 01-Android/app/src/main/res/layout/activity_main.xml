@@ -63,4 +63,14 @@
         app:layout_constraintEnd_toEndOf="@+id/btn_ir_intent_explicito"
         app:layout_constraintStart_toStartOf="@+id/btn_ir_intent_explicito" />
 
+    <Button
+        android:id="@+id/btn_sqlite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="Sqlite"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
