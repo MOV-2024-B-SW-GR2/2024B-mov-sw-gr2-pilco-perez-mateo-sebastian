@@ -88,6 +88,12 @@ class MainActivity : AppCompatActivity() {
             .setOnClickListener{
                 irActividad(ECrudEntrenador::class.java)
             }
+
+        val btnGMaps = findViewById<Button>(R.id.btn_google_maps)
+        btnGMaps
+            .setOnClickListener{
+                irActividad(GGoogleMaps::class.java)
+            }
     }
 
     val callbackContenidoIntentImplicito = registerForActivityResult(
