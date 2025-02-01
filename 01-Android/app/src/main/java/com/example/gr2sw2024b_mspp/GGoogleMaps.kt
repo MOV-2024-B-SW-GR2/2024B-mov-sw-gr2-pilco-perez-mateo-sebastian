@@ -3,6 +3,7 @@ package com.example.gr2sw2024b_mspp
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -38,6 +39,13 @@ class GGoogleMaps : AppCompatActivity() {
         solicitarPermisos()
         //Inicializar lógica del mapa
         inicializarLogicaMapa()
+
+        val btn_Carolina = findViewById<Button>(R.id.btn_ir_carolina)
+        btn_Carolina.setOnClickListener {
+            val carolina = LatLng(-0.1838874666425376, -78.48462687495609)
+            moverCamaraConZoom(carolina)
+        }
+
     }
 
     fun tengoPermisos(): Boolean {
